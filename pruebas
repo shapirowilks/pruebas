@@ -1,0 +1,59 @@
+//ahorcado
+using System;
+using System.Text;
+
+public class Ejercicio_4493
+{
+	public static void Main()
+	{
+		string palabra, resolver;
+		char letra;
+		
+	
+		int oportunidades = 0, maximo = 8;
+
+		Console.Write("Escribe una palabra: ");
+		palabra = Console.ReadLine();
+
+		StringBuilder guionesBuilder = new StringBuilder(palabra.Length);
+		StringBuilder letrausada = new StringBuilder(26);
+
+		for (int i = 0; i < palabra.Length; i++)
+		{
+			guionesBuilder.Append('_');
+		}
+
+		Console.WriteLine();
+		Console.WriteLine("Bienvenidos al ahorcado");
+		do
+		{
+			Console.WriteLine("Intento {0} de {1}", oportunidades + 1, maximo);
+			Console.WriteLine("Letras usadas: ", letrausada);
+			
+			Console.WriteLine("Elige una letra: ");
+			letra = Convert.ToChar(Console.ReadLine());
+			
+			int i = 0;
+			do
+			{
+				if (palabra.IndexOf(letra, i) >= 0)
+					guionesBuilder[palabra.IndexOf(letra,i)] = palabra[palabra.IndexOf(letra,i)];
+				letrausada.Append(letra);
+				i++;
+			}
+			while (i < palabra.Length);
+			
+			++oportunidades;
+
+			resolver = guionesBuilder.ToString();
+			
+			Console.WriteLine(resolver);
+			Console.WriteLine();
+								
+		}
+		while ((oportunidades<maximo)||(resolver!=palabra));
+			   
+		Console.ReadKey();
+	}
+}
+
